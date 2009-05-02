@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="ja">
+<head>
+  <meta name="Content-Type" content="text/html;charset=utf-8">
+  <title>{$t.def('chat@title')}</title>
+  <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+  <script type="text/javascript">
+    var since_id = {$since_id};
+    var crawl;
+    google.load('jquery', '1');
+    google.setOnLoadCallback(function(){
+      var reloadMessages = function(){
+        if(crawl) crawl.abort();
+        crawl = $.ajax({
+          url: '{$t.url("server.php")}',
+          data: {since_id: since_id},
+          error: function(){
+            setTimeout(reloadMessages, 1000);
+          },
+          success: function(data, messages){
+            alert(messages);
+            setTimeout(reloadMessages, 200);
+          },
+          dataType: 'json'
+        });
+      }
+      
+      $('#fields').submit(function(event){
+        crawl.abort();
+        var name = $(this).children('input[name=name]').val();
+        var description = $(this).children('textarea').val();
+        $.post($(this).attr('action'), {name: name, description: description}, function(){
+          $('#fields').children('textarea').val('');
+          setTimeout(reloadMessages, 200);
+        });
+        event.preventDefault();
+        return false;
+      });
+      setTimeout(reloadMessages, 200);
+    });
+  </script>
+</head>
+<body>
+  <h1>{$t.def('chat@title')}</h1>
+  <dl id="messages">
+    <rt:loop param="object_list" var="object">
+      <dt id="{$object.id()}"><span class="name">{$t.html($object.name())}</span><span class="date">{$object.fmCreate_date()}</span></dt>
+      <dd>{$t.html($object.description())}</dd>
+    </rt:loop>
+  </dl>
+  
+  <form action="{$t.url('say')}" method="post" id="fields">
+    <input type="text" name="name" size="16" />
+    <textarea name="description" rows="4" cols="60">hoge</textarea>
+    <input type="submit" value="say" />
+  </form>
+</body>
+</html>
