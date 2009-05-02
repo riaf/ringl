@@ -23,7 +23,7 @@ class ChatServer extends Flow
         foreach($object_list as $object){
             $result[] = $object->hash();
         }
-        return $callback. '('. Text::to_json($result). ');';
+        return $callback. '('. json_encode($result). ');';
     }
     public static function touch_pid(){
         touch(work_path(sprintf('%d.pid', self::$pid)));
