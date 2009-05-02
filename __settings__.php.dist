@@ -1,0 +1,9 @@
+<?php
+require '/Users/riaf/dev/libs/rhaco2/rhaco2';
+def('core.Log@disp', 'debug');
+application_settings(__FILE__, 'http://localhost/chat');
+def('core.Lib@server', 'http://p.rhaco.org');
+
+def('db.Db@chat', 'type=mysql,dbname=chat,user=root,password=root,prefix=CHAT_,upper=true');
+def('chat@title', 'Simple Chat');
+def('chat@timeout', 30);
