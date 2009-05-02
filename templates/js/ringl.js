@@ -15,6 +15,7 @@ google.setOnLoadCallback(function(){
         });
       },
       complete: function(){
+        console.log('reconnect...');
         setTimeout(reloadMessages, 500);
       },
       dataType: 'jsonp'
