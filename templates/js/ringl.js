@@ -21,7 +21,7 @@ google.setOnLoadCallback(function(){
             '<dt id="'+ this.id+ '"><span class="name">'+ this.name+ '</span><span class="date">'
             + this.create_date+ '</span></dt>'
             + '<dd>'+ this.description+ '</dd>'
-          ).scrollTop($(window).height());
+          ).scrollTop(999999);
         });
         setTimeout(reloadMessages, 200);
       },
@@ -30,17 +30,17 @@ google.setOnLoadCallback(function(){
   }
   
   $('#fields').submit(function(event){
-    var name = $(this).children('input[name=name]').val();
-    var description = $(this).children('textarea').val();
-    $.post($(this).attr('action'), {name: name, description: description}, function(){
-      $('#fields').children('textarea').val('');
+    var name = $('#fields input[name=name]').val();
+    var description = $('#fields textarea').val();
+    $.post($('#fields').attr('action'), {name: name, description: description}, function(){
+      $('#fields textarea').val('');
       setTimeout(reloadMessages, 200);
     });
     event.preventDefault();
     return false;
   });
   
-  $('#messages').css('height', $(window).height() - 180).scrollTop($(window).height());
+  $('#messages').css('height', $(window).height() - 180).scrollTop(999999);
   $(window).bind("resize", function(e){
     $(window).css('height', $(window).height() - 180);
   });
