@@ -25,12 +25,28 @@ dl#messages {
     background: #f0f8ff;
     overflow: scroll;
 }
+dl#messages dt {
+    text-indent: .5em;
+    line-height: 1.5;
+    background: #e6e6fa;
+}
+dl#messages dd {
+    line-height: 1.2;
+    margin: .5em 1.5em;
+}
+dl#messages span.name {
+    font-weight: bold;
+}
+dl#messages span.date {
+    margin-left: 20px;
+    font-size: 80%;
+}
 
 form#fields {
     position: absolute;
     overflow: hidden;
     bottom: 0;
-    background: #e6e6fa;
+    background: #b0c4de;
     width: 100%;
     height: 120px;
     margin: 0;
