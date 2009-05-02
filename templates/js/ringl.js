@@ -16,7 +16,7 @@ google.setOnLoadCallback(function(){
       },
       complete: function(){
         setTimeout(reloadMessages, 500);
-      }
+      },
       dataType: 'jsonp'
     });
   }
