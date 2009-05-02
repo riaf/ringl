@@ -26,14 +26,10 @@
               if(this.id > since_id){
                 since_id = this.id;
               }
-              $('dl#messages').prepend(
-                $('<dt />').html(
-                  $('<span />').addClass('name').val(this.name).after(
-                    $('<span />').addClass('date').val(this.create_date)
-                  )
-                ).attr('id', this.id).after(
-                  $('<dd />').val(this.description)
-                )
+              $('#messages').prepend(
+                '<dt id="'+ this.id+ '"><span class="name">'+ this.name+ '</span><span class="date">'
+                + this.create_date+ '</span></dt>'
+                + '<dd>'+ this.description+ '</dd>'
               );
             });
             setTimeout(reloadMessages, 200);
