@@ -1,4 +1,3 @@
-//var since_id = {$since_id};
 google.load('jquery', '1');
 google.setOnLoadCallback(function(){
   var reloadMessages = function(){
