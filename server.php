@@ -15,5 +15,8 @@ if(count($object_list) > 0){
     exit;
 }
 
-pcntl_signal(SIGUSR1, array(C(ChatServer), 'models_json'));
+$server = new ChatServer();
+pcntl_signal(SIGTERM, array(&$server, 'models_json'));
+pcntl_signal(SIGHUP, array(&$server, 'models_json'));
+pcntl_signal(SIGUSR1, array(&$server, 'models_json'));
 sleep(def('chat@timeout'));

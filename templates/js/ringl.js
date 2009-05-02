@@ -1,6 +1,7 @@
+var reloadMessages;
 google.load('jquery', '1');
 google.setOnLoadCallback(function(){
-  var reloadMessages = function(){
+  reloadMessages = function(){
     $.ajax({
       url: messages_url,
       data: {since_id: since_id},
