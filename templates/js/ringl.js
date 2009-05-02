@@ -32,14 +32,16 @@ google.setOnLoadCallback(function(){
   $('#fields').submit(function(event){
     var name = $('#fields input[name=name]').val();
     var description = $('#fields textarea').val();
-    $.post($('#fields').attr('action'), {name: name, description: description}, function(){
-      $('#fields textarea').val('');
-      setTimeout(reloadMessages, 200);
-    });
+    if(name != '' && description != ''){
+      $.post($('#fields').attr('action'), {name: name, description: description}, function(){
+        $('#fields textarea').val('');
+        setTimeout(reloadMessages, 200);
+      });
+    }
     event.preventDefault();
     return false;
   });
-  $('#fields textarea').keyup(function(e){
+  $('#fields textarea').keypress(function(e){
     if(e.keyCode == 13 && e.shiftKey == false){
       $('#fields').submit();
     }
