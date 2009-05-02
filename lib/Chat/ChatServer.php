@@ -15,15 +15,15 @@ class ChatServer extends Flow
 	}
     public function models_json(){
         $object_list = C(ChatMessage)->find_all(Q::gt('id', $this->inVars('since_id', 0)), Q::order('-id'));
-        echo self::models_to_json($object_list);
+        echo self::models_to_jsonp(array_reverse($object_list), $this->inVars('callback', 'callback'));
         exit;
     }
-    private static function models_to_json($object_list){
+    public static function models_to_jsonp($object_list, $callback="callback"){
         $result = array();
         foreach($object_list as $object){
             $result[] = $object->hash();
         }
-        return Text::to_json($result);
+        return $callback. '('. json_encode($result). ');';
     }
     public static function touch_pid(){
         touch(work_path(sprintf('%d.pid', self::$pid)));
