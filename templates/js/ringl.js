@@ -2,7 +2,7 @@ google.load('jquery', '1');
 google.setOnLoadCallback(function(){
   var reloadMessages = function(){
     $.ajax({
-      url: '{$rtf.gurl()}',
+      url: messages_url,
       data: {since_id: since_id},
       error: function(XMLHttpRequest, textStatus, errorThrown){
         console.log(XMLHttpRequest);
