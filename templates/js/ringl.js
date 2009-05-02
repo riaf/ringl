@@ -4,15 +4,7 @@ google.setOnLoadCallback(function(){
     $.ajax({
       url: messages_url,
       data: {since_id: since_id},
-      error: function(XMLHttpRequest, textStatus, errorThrown){
-        console.log(XMLHttpRequest);
-        console.log(textStatus);
-        console.log(errorThrown);
-        setTimeout(reloadMessages, 1000);
-      },
       success: function(data, messages){
-        console.log(data);
-        console.log(messages);
         jQuery.each(data, function(){
           if(this.id > since_id){
             since_id = this.id;
@@ -23,8 +15,10 @@ google.setOnLoadCallback(function(){
             + '<dd>'+ this.description+ '</dd>'
           ).scrollTop(999999);
         });
-        setTimeout(reloadMessages, 200);
       },
+      complete: function(){
+        setTimeout(reloadMessages, 500);
+      }
       dataType: 'jsonp'
     });
   }
@@ -32,7 +26,7 @@ google.setOnLoadCallback(function(){
   $('#fields').submit(function(event){
     var name = $('#fields input[name=name]').val();
     var description = $('#fields textarea').val();
-    if(name != '' && description != ''){
+    if(jQuery.trim(name) != '' && jQuery.trim(description) != ''){
       $.post($('#fields').attr('action'), {name: name, description: description}, function(){
         $('#fields textarea').val('');
         setTimeout(reloadMessages, 200);
