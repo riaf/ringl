@@ -39,6 +39,11 @@ google.setOnLoadCallback(function(){
     event.preventDefault();
     return false;
   });
+  $('#fields textarea').keyup(function(e){
+    if(e.keyCode == 13 && e.shiftKey == false){
+      $('#fields').submit();
+    }
+  });
   
   $('#messages').css('height', $(window).height() - 180).scrollTop(999999);
   $(window).bind("resize", function(e){
