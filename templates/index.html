@@ -7,15 +7,16 @@
   <script src="http://www.google.com/jsapi" type="text/javascript"></script>
   <script type="text/javascript">
     var since_id = {$since_id};
-    var crawl;
     google.load('jquery', '1');
     google.setOnLoadCallback(function(){
       var reloadMessages = function(){
-        if(crawl) crawl.abort();
-        crawl = $.ajax({
+        $.ajax({
           url: '{$rtf.gurl()}',
           data: {since_id: since_id},
-          error: function(){
+          error: function(XMLHttpRequest, textStatus, errorThrown){
+            console.log(XMLHttpRequest);
+            console.log(textStatus);
+            console.log(errorThrown);
             setTimeout(reloadMessages, 1000);
           },
           success: function(data, messages){
@@ -35,11 +36,9 @@
           },
           dataType: 'jsonp'
         });
-        console.log(crawl);
       }
       
       $('#fields').submit(function(event){
-        crawl.abort();
         var name = $(this).children('input[name=name]').val();
         var description = $(this).children('textarea').val();
         $.post($(this).attr('action'), {name: name, description: description}, function(){
