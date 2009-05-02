@@ -18,7 +18,7 @@ class ChatServer extends Flow
         echo self::models_to_json($object_list);
         exit;
     }
-    private static function models_to_json($object_list){
+    public static function models_to_json($object_list){
         $result = array();
         foreach($object_list as $object){
             $result[] = $object->hash();
