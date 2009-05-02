@@ -8,7 +8,7 @@ class Chat extends Flow
     public function models(){
         $paginator = new Paginator(50, $this->inVars('page', 1));
         $object_list = C(ChatMessage)->find_all(Q::order('-id'), $paginator);
-        $this->vars('object_list', $object_list);
+        $this->vars('object_list', array_reverse($object_list));
         $since_id = 0;
         foreach($object_list as $object) $since_id = ($object->id() > $since_id)? $object->id(): $since_id;
         $this->vars('since_id', $since_id);
