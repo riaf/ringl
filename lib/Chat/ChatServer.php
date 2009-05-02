@@ -14,6 +14,7 @@ class ChatServer extends Flow
 		self::remove_pid();
 	}
     public function models_json(){
+        usleep(500000);
         $object_list = C(ChatMessage)->find_all(Q::gt('id', $this->inVars('since_id', 0)), Q::order('-id'));
         echo self::models_to_jsonp(array_reverse($object_list), $this->inVars('callback', 'callback'));
         exit;
