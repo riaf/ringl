@@ -9,11 +9,9 @@ google.setOnLoadCallback(function(){
           if(this.id > since_id){
             since_id = this.id;
           }
-          $('#messages').append(
-            '<dt id="'+ this.id+ '"><span class="name">'+ this.name+ '</span><span class="date">'
+          $('#messages').append('<dt id="'+ this.id+ '"><span class="name">'+ this.name+ '</span><span class="date">'
             + this.create_date+ '</span></dt>'
-            + '<dd>'+ this.description+ '</dd>'
-          ).scrollTop(999999);
+            + '<dd>'+ this.description+ '</dd>').scrollTop(999999);
         });
       },
       complete: function(){
