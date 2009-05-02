@@ -15,7 +15,7 @@ class ChatServer extends Flow
 	}
     public function models_json(){
         $object_list = C(ChatMessage)->find_all(Q::gt('id', $this->inVars('since_id', 0)), Q::order('-id'));
-        echo self::models_to_jsonp($object_list);
+        echo self::models_to_jsonp($object_list, $this->inVars('callback', 'callback'));
         exit;
     }
     public static function models_to_jsonp($object_list, $callback="callback"){

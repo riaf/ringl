@@ -11,7 +11,7 @@ header('application/x-javascript');
 $req = new Request();
 $object_list = C(ChatMessage)->find_all(Q::gt('id', $req->inVars('since_id', 0)), Q::order('-id'));
 if(count($object_list) > 0){
-    echo ChatServer::models_to_jsonp($object_list);
+    echo ChatServer::models_to_jsonp($object_list, $req->inVars('callback', 'callback'));
     exit;
 }
 
