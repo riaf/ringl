@@ -11,9 +11,9 @@
     google.load('jquery', '1');
     google.setOnLoadCallback(function(){
       var reloadMessages = function(){
-        if(crawl) $(crawl).abort();
+        if(crawl) crawl.abort();
         crawl = $.ajax({
-          url: '{$t.url("server.php")}',
+          url: '{$rtf.url()}',
           data: {since_id: since_id},
           error: function(){
             setTimeout(reloadMessages, 1000);
@@ -33,13 +33,13 @@
             });
             // setTimeout(reloadMessages, 200);
           },
-          dataType: 'json'
+          dataType: 'jsonp'
         });
         console.log(crawl);
       }
       
       $('#fields').submit(function(event){
-        $(crawl).abort();
+        crawl.abort();
         var name = $(this).children('input[name=name]').val();
         var description = $(this).children('textarea').val();
         $.post($(this).attr('action'), {name: name, description: description}, function(){
