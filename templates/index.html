@@ -13,7 +13,7 @@
       var reloadMessages = function(){
         if(crawl) crawl.abort();
         crawl = $.ajax({
-          url: '{$rtf.url()}',
+          url: '{$rtf.gurl()}',
           data: {since_id: since_id},
           error: function(){
             setTimeout(reloadMessages, 1000);
