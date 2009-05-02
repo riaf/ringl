@@ -19,6 +19,8 @@
             setTimeout(reloadMessages, 1000);
           },
           success: function(data, messages){
+            console.log(data);
+            console.log(messages);
             jQuery.each(data, function(){
               if(this.id > since_id){
                 since_id = this.id;
@@ -29,7 +31,7 @@
                 ).attr('id', this.id).after($('<dd>').val(this.description))
               );
             });
-            setTimeout(reloadMessages, 200);
+            // setTimeout(reloadMessages, 200);
           },
           dataType: 'json'
         });
