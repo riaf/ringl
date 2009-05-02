@@ -26,13 +26,13 @@
               if(this.id > since_id){
                 since_id = this.id;
               }
-              //$('dl#messages').prepend(
-              //  $('<dt>').html(
-              //    $('<span>').addClass('name').val(this.name).after($('<span>').addClass('date').val(this.create_date))
-              //  ).attr('id', this.id).after($('<dd>').val(this.description))
-              //);
+              $('dl#messages').prepend(
+                $('<dt>').html(
+                  $('<span>').addClass('name').val(this.name).after($('<span>').addClass('date').val(this.create_date))
+                ).attr('id', this.id).after($('<dd>').val(this.description))
+              );
             });
-            // setTimeout(reloadMessages, 200);
+            setTimeout(reloadMessages, 200);
           },
           dataType: 'jsonp'
         });
